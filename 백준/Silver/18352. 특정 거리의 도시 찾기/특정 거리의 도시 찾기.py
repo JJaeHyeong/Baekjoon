@@ -1,4 +1,6 @@
 from collections import deque
+import sys
+input = sys.stdin.readline
 
 n, m, k, x = map(int, input().split())
 
@@ -16,21 +18,21 @@ distance[x] = 0
 q = deque([x])
 while q:
     now = q.popleft()
-    for next_city in graph[now]:
-        if distance[next_city] == -1:
-            distance[next_city] = distance[now] + 1
-            q.append(next_city)
+    for city in graph[now]:
+        if distance[city] == -1:
+            distance[city] = distance[now] + 1
+            q.append(city)
 
 # 거리가 K인 도시 번호를 저장하는 리스트
-result = []
+match = []
 for i in range(1, n + 1):
     if distance[i] == k:
-        result.append(i)
+        match.append(i)
 
 # 출력
-if not result:
+if not match:
     print(-1)
 else:
-    result.sort()
-    for city in result:
+    match.sort()
+    for city in match:
         print(city)
